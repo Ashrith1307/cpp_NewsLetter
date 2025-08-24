@@ -2,6 +2,7 @@ import smtplib
 import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import os
 
 # Example tips
 tips = [
@@ -141,9 +142,10 @@ today = datetime.date.today()
 tip_of_the_day = tips[today.toordinal() % len(tips)]
 
 # Email setup
-sender_email = "cppbytesbyash@gmail.com"
-receiver_emails = ["devarapallyashrithreddy@gmail.com","Jashwanthbanala96@gmail.com","srujansarika43@gmail.com","rithvikshelam@gmail.com","rakeshkavati63@gmail.com","katanihal455@gmail.com","Pallerlasaikrishna1216@gmail.com"]
-password = "ljwa dpav wuhh ykwk"
+sender_email = os.environ["SENDER_EMAIL"]
+password = os.environ["EMAIL_PASSWORD"]
+
+receiver_emails = os.environ["RECEIVER_EMAILS"].split(",")  
 
 # HTML message
 html = f"""
