@@ -3,7 +3,7 @@ name: Send Daily C++ Byte
 on:
   schedule:
     # 14:35 IST = 09:05 UTC
-    - cron: "5 9 * * *"
+    - cron: "30 9 * * *"
   workflow_dispatch: {} # lets you run it manually too
 
 jobs:
