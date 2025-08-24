@@ -1,0 +1,8 @@
+services:
+  - type: cron
+    name: cpp-bytes-daily
+    env: python
+    schedule: "0 8 * * *" # Run every day at 08:00 UTC
+    buildCommand: ""
+    startCommand: "python bytes.py"
+    sourceDir: "cpp-bytes"
