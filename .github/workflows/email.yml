@@ -24,8 +24,12 @@ jobs:
 
       - name: Debug Secrets
         run: |
-          echo "Sender: ${{ secrets.SENDER_EMAIL }}"
-          echo "Receivers: ${{ secrets.RECEIVER_EMAILS }}"
+          echo "Sender: $SENDER_EMAIL"
+          echo "Receivers: $RECEIVER_EMAILS"
+        env:
+          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          RECEIVER_EMAILS: ${{ secrets.RECEIVER_EMAILS }}
 
       - name: Run Script
         env:
