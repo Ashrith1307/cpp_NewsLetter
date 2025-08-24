@@ -2,27 +2,32 @@ name: Send Daily C++ Byte
 
 on:
   schedule:
-    # 14:35 IST = 09:05 UTC
-    - cron: "30 9 * * *"
-  workflow_dispatch: {} # lets you run it manually too
+    - cron: "5 9 * * *" # 14:35 IST
+  workflow_dispatch: # allows manual trigger
 
 jobs:
   send-email:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
-          python-version: "3.x"
+          python-version: "3.10"
 
-      - name: Install deps
+      - name: Install dependencies
         run: |
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: Run mailer
+      - name: Debug Secrets
+        run: |
+          echo "Sender: ${{ secrets.SENDER_EMAIL }}"
+          echo "Receivers: ${{ secrets.RECEIVER_EMAILS }}"
+
+      - name: Run Script
         env:
           SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}

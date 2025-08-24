@@ -1,0 +1,6 @@
+schedule
+smtplib
+email
+python-dotenv
+requests
+beautifulsoup4  
